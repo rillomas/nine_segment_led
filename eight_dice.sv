@@ -1,6 +1,6 @@
 module eight_dice(
-	input bit [2:0] s,
-	output bit [8:0] out);
+	input logic [2:0] s,
+	output logic [8:0] out);
 	// convert 3 bit push button input to nine segment LED
 	// tl...top left, tr...top right
 	// bl...bottom left, br... bottom right

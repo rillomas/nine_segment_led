@@ -1,8 +1,7 @@
 module eight_dice(
-	input logic [2:0]s,
-	output logic [2:0]row,
-	output logic [2:0]col);
-	// light LED based on switch
+	input bit [2:0] s,
+	output bit [8:0] out);
+	// convert 3 bit push button input to nine segment LED
 	// tl...top left, tr...top right
 	// bl...bottom left, br... bottom right
 	// cl...center left, cr... center right
@@ -17,24 +16,56 @@ module eight_dice(
 	always @ (*) begin
 		case (s)
 			3'b000: begin
-				row = {3{1'b0}};
-				col = {3{1'b0}};
+				out = {9{1'b0}};
 			end
 			3'b001: begin
-				row = {1'b0,1'b1,1'b0};
-				col = {1'b0,1'b1,1'b0};
+				out = {
+					1'b0, 1'b0, 1'b0,
+					1'b0, 1'b1, 1'b0,
+					1'b0, 1'b0, 1'b0
+				};
 			end
 			3'b010: begin
-				row = {1'b1,1'b0,1'b1};
-				col = {1'b1,1'b0,1'b1};
+				out = {
+					1'b1, 1'b0, 1'b0,
+					1'b0, 1'b0, 1'b0,
+					1'b0, 1'b0, 1'b1
+				};
 			end
 			3'b011: begin
-				row = {3{1'b1}};
-				col = {3{1'b1}};
+				out = {
+					1'b1, 1'b0, 1'b0,
+					1'b0, 1'b1, 1'b0,
+					1'b0, 1'b0, 1'b1
+				};
 			end
-			default: begin
-				row = {3{1'b0}};
-				col = {3{1'b0}};
+			3'b100: begin
+				out = {
+					1'b1, 1'b0, 1'b1,
+					1'b0, 1'b0, 1'b0,
+					1'b1, 1'b0, 1'b1
+				};
+			end
+			3'b101: begin
+				out = {
+					1'b1, 1'b0, 1'b1,
+					1'b0, 1'b1, 1'b0,
+					1'b1, 1'b0, 1'b1
+				};
+			end
+			3'b110: begin
+				out = {
+					1'b1, 1'b0, 1'b1,
+					1'b1, 1'b0, 1'b1,
+					1'b1, 1'b0, 1'b1
+				};
+			end
+			3'b111: begin
+				out = {
+					1'b1, 1'b0, 1'b1,
+					1'b1, 1'b1, 1'b1,
+					1'b1, 1'b0, 1'b1
+				};
 			end
 		endcase
 	end

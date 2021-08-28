@@ -1,10 +1,11 @@
 `timescale 1ns/1ns
-module testbench ();
+module eight_dice_testbench ();
 
 	parameter STEP = 100;
-	logic [2:0] s, row, col;
+	bit [2:0] s;
+	bit [8:0] out;
 	
-	eight_dice dice(.s(s), .row(row), .col(col));
+	eight_dice dice(.s(s), .out(out));
 	
 	initial begin
 		s[0] <= 1'b0;

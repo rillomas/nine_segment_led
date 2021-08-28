@@ -1,1 +1,1 @@
-nine-segment LED sample using Cyclone 10 LP and 8x8 LED array (TOM-15888H-B)
+nine-segment LED sample using Cyclone 10 LP and 8x8 LED array (TOM-15888H-B). We only use the top-left 3x3 LEDs for now.

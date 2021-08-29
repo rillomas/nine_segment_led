@@ -13,60 +13,17 @@ module eight_dice(
 	// 101 : tl, tr, bl, br, center
 	// 110 : tl, cl, bl, tr, cr, br
 	// 111 : tl, cl, bl, tr, cr, br, center
-	always @ (*) begin
+	always_comb begin
 		case (s)
-			3'b000: begin
-				out = {9{1'b0}};
-			end
-			3'b001: begin
-				out = {
-					1'b0, 1'b0, 1'b0,
-					1'b0, 1'b1, 1'b0,
-					1'b0, 1'b0, 1'b0
-				};
-			end
-			3'b010: begin
-				out = {
-					1'b1, 1'b0, 1'b0,
-					1'b0, 1'b0, 1'b0,
-					1'b0, 1'b0, 1'b1
-				};
-			end
-			3'b011: begin
-				out = {
-					1'b1, 1'b0, 1'b0,
-					1'b0, 1'b1, 1'b0,
-					1'b0, 1'b0, 1'b1
-				};
-			end
-			3'b100: begin
-				out = {
-					1'b1, 1'b0, 1'b1,
-					1'b0, 1'b0, 1'b0,
-					1'b1, 1'b0, 1'b1
-				};
-			end
-			3'b101: begin
-				out = {
-					1'b1, 1'b0, 1'b1,
-					1'b0, 1'b1, 1'b0,
-					1'b1, 1'b0, 1'b1
-				};
-			end
-			3'b110: begin
-				out = {
-					1'b1, 1'b0, 1'b1,
-					1'b1, 1'b0, 1'b1,
-					1'b1, 1'b0, 1'b1
-				};
-			end
-			3'b111: begin
-				out = {
-					1'b1, 1'b0, 1'b1,
-					1'b1, 1'b1, 1'b1,
-					1'b1, 1'b0, 1'b1
-				};
-			end
+			3'b000: out = 9'b000000000;
+			3'b001: out = 9'b000010000;
+			3'b010: out = 9'b100000001;
+			3'b011: out = 9'b100010001;
+			3'b100: out = 9'b101000101;
+			3'b101: out = 9'b101010101;
+			3'b110: out = 9'b111000111;
+			3'b111: out = 9'b111010111;
+			default: out = 9'b000000000;
 		endcase
 	end
 endmodule

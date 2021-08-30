@@ -9,29 +9,29 @@ module eight_dice_testbench ();
 	
 	initial begin
 		s = 3'b000;
+		#STEP
 		assert (out === 9'b000000000) else $error("000 failed");
-		#STEP
 		s = 3'b001;
+		#STEP
 		assert (out === 9'b000010000) else $error("001 failed");
-		#STEP
 		s = 3'b010;
+		#STEP
 		assert (out === 9'b100000001) else $error("010 failed");
-		#STEP
 		s = 3'b011;
+		#STEP
 		assert (out === 9'b100010001) else $error("011 failed");
-		#STEP
 		s = 3'b100;
+		#STEP
 		assert (out === 9'b101000101) else $error("100 failed");
-		#STEP
 		s = 3'b101;
+		#STEP
 		assert (out === 9'b101010101) else $error("101 failed");
-		#STEP
 		s = 3'b110;
+		#STEP
 		assert (out === 9'b111000111) else $error("110 failed");
-		#STEP
 		s = 3'b111;
-		assert (out === 9'b111010111) else $error("111 failed");
 		#STEP
+		assert (out === 9'b111010111) else $error("111 failed");
 		$stop;
 	end
 

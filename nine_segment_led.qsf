@@ -50,12 +50,12 @@ set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_location_assignment PIN_E15 -to s0
 set_location_assignment PIN_F14 -to s1
 set_location_assignment PIN_C11 -to s2
-#set_location_assignment PIN_B1 -to o0
-#set_location_assignment PIN_C2 -to o1
-#set_location_assignment PIN_F3 -to o2
-set_location_assignment PIN_L14 -to o0
-set_location_assignment PIN_K15 -to o1
-set_location_assignment PIN_J14 -to o2
+set_location_assignment PIN_B1 -to o0
+set_location_assignment PIN_C2 -to o1
+set_location_assignment PIN_F3 -to o2
+#set_location_assignment PIN_L14 -to o0
+#set_location_assignment PIN_K15 -to o1
+#set_location_assignment PIN_J14 -to o2
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to o0
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to o1
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to o2

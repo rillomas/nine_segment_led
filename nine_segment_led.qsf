@@ -86,4 +86,7 @@ set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id eight_dice_t
 set_global_assignment -name EDA_TEST_BENCH_RUN_SIM_FOR "3 us" -section_id eight_dice_testbench
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME eight_dice_testbench -section_id eight_dice_testbench
 set_global_assignment -name EDA_TEST_BENCH_FILE eight_dice_testbench.sv -section_id eight_dice_testbench
+set_location_assignment PIN_E1 -to clk
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk
+set_global_assignment -name SDC_FILE led.sdc
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

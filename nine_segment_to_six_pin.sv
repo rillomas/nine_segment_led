@@ -6,10 +6,6 @@ module nine_segment_to_six_pin(
 	output logic [2:0] cols);
 	typedef enum logic [1:0] {S0, S1, S2} blink_state;
 	blink_state state = S0, next_state = S1;
-	// initial begin
-	// 	state = S0;
-	// 	next_state = S1;
-	// end
 	always_ff @(posedge clk) begin
 		// Switch between rows based on clock value to simultaneously light multiple rows
 		state <= next_state;
@@ -44,6 +40,7 @@ module nine_segment_to_six_pin(
 			end
 		endcase
 	end
+	// Rows should become high and cols should become low to light LEDs
 	assign cols[2] = ~(segments[8] | segments[5] | segments[2]);
 	assign cols[1] = ~(segments[7] | segments[4] | segments[1]);
 	assign cols[0] = ~(segments[6] | segments[3] | segments[0]);

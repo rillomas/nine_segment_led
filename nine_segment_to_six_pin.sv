@@ -4,11 +4,12 @@ module nine_segment_to_six_pin(
 	input logic [8:0] segments,
 	output logic [2:0] rows,
 	output logic [2:0] cols);
-	typedef enum logic [1:0] {R0, R1, R2} row_index;
-	row_index state, next_state;
-	initial begin
-		state = R0;
-	end
+	typedef enum logic [1:0] {S0, S1, S2} blink_state;
+	blink_state state = S0, next_state = S1;
+	// initial begin
+	// 	state = S0;
+	// 	next_state = S1;
+	// end
 	always_ff @(posedge clk) begin
 		// Switch between rows based on clock value to simultaneously light multiple rows
 		state <= next_state;
@@ -17,29 +18,29 @@ module nine_segment_to_six_pin(
 	always_comb begin
 		// light LED and transition to next state
 		case (state)
-			R0: begin
+			S0: begin
 				rows[2] = segments[8] | segments[7] | segments[6];
 				rows[1] = 0;
 				rows[0] = 0;
-				next_state = R1;
+				next_state = S1;
 			end
-			R1: begin
+			S1: begin
 				rows[2] = 0;
 				rows[1] = segments[5] | segments[4] | segments[3];
 				rows[0] = 0;
-				next_state = R2;
+				next_state = S2;
 			end
-			R2: begin
+			S2: begin
 				rows[2] = 0;
 				rows[1] = 0;
 				rows[0] = segments[2] | segments[1] | segments[0];
-				next_state = R0;
+				next_state = S0;
 			end
 			default: begin
 				rows[2] = 0;
 				rows[1] = 0;
 				rows[0] = 0;
-				next_state = R0;
+				next_state = S0;
 			end
 		endcase
 	end

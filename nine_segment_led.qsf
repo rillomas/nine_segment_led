@@ -77,7 +77,7 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
 set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
-set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH eight_dice_testbench -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH nine_segment_to_six_pin_testbench -section_id eda_simulation
 set_global_assignment -name SYSTEMVERILOG_FILE nine_segment_to_six_pin.sv
 set_global_assignment -name SYSTEMVERILOG_FILE eight_dice.sv
 set_global_assignment -name SYSTEMVERILOG_FILE nine_segment_led.sv
@@ -85,8 +85,13 @@ set_global_assignment -name EDA_TEST_BENCH_NAME eight_dice_testbench -section_id
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id eight_dice_testbench
 set_global_assignment -name EDA_TEST_BENCH_RUN_SIM_FOR "3 us" -section_id eight_dice_testbench
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME eight_dice_testbench -section_id eight_dice_testbench
-set_global_assignment -name EDA_TEST_BENCH_FILE eight_dice_testbench.sv -section_id eight_dice_testbench
 set_location_assignment PIN_E1 -to clk
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk
 set_global_assignment -name SDC_FILE led.sdc
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name EDA_TEST_BENCH_FILE eight_dice_testbench.sv -section_id eight_dice_testbench
+set_global_assignment -name EDA_TEST_BENCH_NAME nine_segment_to_six_pin_testbench -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id nine_segment_to_six_pin_testbench
+set_global_assignment -name EDA_TEST_BENCH_RUN_SIM_FOR "3 ms" -section_id nine_segment_to_six_pin_testbench
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME nine_segment_to_six_pin_testbench -section_id nine_segment_to_six_pin_testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE nine_segment_to_six_pin_testbench.sv -section_id nine_segment_to_six_pin_testbench

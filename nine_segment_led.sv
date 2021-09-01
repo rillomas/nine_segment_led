@@ -1,10 +1,7 @@
 module nine_segment_led(
 	input logic clk,s0,s1,s2,
 	output logic o0,o1,o2,o3,o4,o5);
-	logic [31:0] cnt;
-	initial begin
-		cnt = 32'h00000000; // initialize counter with zero
-	end
+	logic [31:0] cnt = 32'h00000000; // initialize counter with zero
 	always_ff @(posedge clk) begin
 		cnt <= cnt + 1; // count up
 	end

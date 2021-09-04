@@ -4,11 +4,16 @@ module nine_segment_to_six_pin(
 	input logic [8:0] segments,
 	output logic [2:0] rows,
 	output logic [2:0] cols);
-	typedef enum logic [1:0] {S0, S1, S2} blink_state;
+	typedef enum {S0, S1, S2} blink_state;
 	blink_state state = S0, next_state = S1;
 	always_ff @(posedge clk) begin
 		// Switch between rows based on clock value to simultaneously light multiple rows
 		state <= next_state;
+	end
+
+	initial begin
+		$dumpfile("dump.vcd");
+		$dumpvars;
 	end
 
 	always_comb begin

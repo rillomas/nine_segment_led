@@ -36,7 +36,7 @@
 #
 # -------------------------------------------------------------------------- #
 
-
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 12
 set_global_assignment -name FAMILY "Cyclone 10 LP"
 set_global_assignment -name DEVICE 10CL025YU256I7G
 set_global_assignment -name TOP_LEVEL_ENTITY nine_segment_led
@@ -53,9 +53,6 @@ set_location_assignment PIN_C11 -to s2
 set_location_assignment PIN_B1 -to o0
 set_location_assignment PIN_C2 -to o1
 set_location_assignment PIN_F3 -to o2
-#set_location_assignment PIN_L14 -to o0
-#set_location_assignment PIN_K15 -to o1
-#set_location_assignment PIN_J14 -to o2
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to o0
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to o1
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to o2
@@ -86,7 +83,7 @@ set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id eight_dice_t
 set_global_assignment -name EDA_TEST_BENCH_RUN_SIM_FOR "3 us" -section_id eight_dice_testbench
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME eight_dice_testbench -section_id eight_dice_testbench
 set_location_assignment PIN_E1 -to clk
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk
+set_instance_assignment -name IO_STANDARD "2.5 V" -to clk
 set_global_assignment -name SDC_FILE led.sdc
 set_global_assignment -name EDA_TEST_BENCH_FILE eight_dice_testbench.sv -section_id eight_dice_testbench
 set_global_assignment -name EDA_TEST_BENCH_NAME nine_segment_to_six_pin_testbench -section_id eda_simulation

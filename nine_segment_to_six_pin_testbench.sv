@@ -2,6 +2,7 @@
 module nine_segment_to_six_pin_testbench ();
 
 	parameter STEP = 50;
+	parameter CLOCK_STEP = 100; // should be twice the value of a step so the clock edge roundtrips
 	logic clk = 0;
 	logic [8:0] segments;
 	logic [2:0] rows, cols;
@@ -20,19 +21,15 @@ module nine_segment_to_six_pin_testbench ();
 		assert ((rows === 3'b000) & (cols === 3'b111)) else $error("0 S0 failed");
 		#STEP
 		assert ((rows === 3'b000) & (cols === 3'b111)) else $error("0 S1 failed");
-		#STEP
-		#STEP
+		#CLOCK_STEP
 		assert ((rows === 3'b000) & (cols === 3'b111)) else $error("0 S2 failed");
 		segments = 9'b000010000;
-		#STEP
-		#STEP
+		#CLOCK_STEP
 		assert ((rows === 3'b000) & (cols === 3'b101)) else $error("1 S0 failed");
-		#STEP
-		#STEP
+		#CLOCK_STEP
 		assert ((rows === 3'b010) & (cols === 3'b101)) else $error("1 S1 failed");
-		#STEP
-		#STEP
-		assert ((rows === 3'b000) & (cols === 3'b101)) else $error("1 S1 failed");
+		#CLOCK_STEP
+		assert ((rows === 3'b000) & (cols === 3'b101)) else $error("1 S2 failed");
 		$stop;
 	end
 

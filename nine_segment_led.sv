@@ -13,7 +13,7 @@ module nine_segment_led(
 	logic [2:0] rows;
 	logic [2:0] cols;
 	logic led;
-	assign led = cnt[24];
+	assign led = cnt[22];
 	nine_segment_to_six_pin convert(.clk(led), .segments(out), .rows(rows), .cols(cols));
 	// o0 ... row 1 (+)
 	// o1 ... row 2 (+)

@@ -23,4 +23,6 @@ module nine_segment_led(
 	// o5 ... col 3 (-)
 	assign {o0,o1,o2} = rows;
 	assign {o3,o4,o5} = cols;
+	// assign {o0,o1,o2} = {1'b1, 1'b0, 1'b1};
+	// assign {o3,o4,o5} = {1'b0, 1'b1, 1'b0};
 endmodule

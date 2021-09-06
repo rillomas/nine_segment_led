@@ -7,13 +7,13 @@ module nine_segment_led(
 	end
 	logic [2:0] s;
 	logic [8:0] out;
-	assign s = {s2,s1,s0};
+	assign s = {~s2,~s1,~s0};
 	eight_dice dice(.s(s), .out(out));
 	// convert 9 segment signals to 6 pin anode LED pins
 	logic [2:0] rows;
 	logic [2:0] cols;
 	logic led;
-	assign led = cnt[22];
+	assign led = cnt[20];
 	nine_segment_to_six_pin convert(.clk(led), .segments(out), .rows(rows), .cols(cols));
 	// o0 ... row 1 (+)
 	// o1 ... row 2 (+)

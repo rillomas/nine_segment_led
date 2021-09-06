@@ -16,20 +16,30 @@ module nine_segment_to_six_pin_testbench ();
 	end
 	
 	initial begin
+		// 0
 		segments = 9'b000000000;
 		#STEP
-		assert ((rows === 3'b000) & (cols === 3'b111)) else $error("0 S0 failed");
+		assert ((rows === 3'b000) & (cols === 3'b000)) else $error("0 S0 failed");
 		#STEP
-		assert ((rows === 3'b000) & (cols === 3'b111)) else $error("0 S1 failed");
+		assert ((rows === 3'b000) & (cols === 3'b000)) else $error("0 S1 failed");
 		#CLOCK_STEP
-		assert ((rows === 3'b000) & (cols === 3'b111)) else $error("0 S2 failed");
+		assert ((rows === 3'b000) & (cols === 3'b000)) else $error("0 S2 failed");
+		// 1
 		segments = 9'b000010000;
 		#CLOCK_STEP
-		assert ((rows === 3'b000) & (cols === 3'b101)) else $error("1 S0 failed");
+		assert ((rows === 3'b010) & (cols === 3'b101)) else $error("1 S0 failed");
 		#CLOCK_STEP
 		assert ((rows === 3'b010) & (cols === 3'b101)) else $error("1 S1 failed");
 		#CLOCK_STEP
-		assert ((rows === 3'b000) & (cols === 3'b101)) else $error("1 S2 failed");
+		assert ((rows === 3'b010) & (cols === 3'b101)) else $error("1 S2 failed");
+		// 2
+		segments = 9'b100000001;
+		#CLOCK_STEP
+		assert ((rows === 3'b100) & (cols === 3'b011)) else $error("2 S0 failed");
+		#CLOCK_STEP
+		assert ((rows === 3'b000) & (cols === 3'b000)) else $error("2 S1 failed");
+		#CLOCK_STEP
+		assert ((rows === 3'b001) & (cols === 3'b110)) else $error("2 S2 failed");
 		$stop;
 	end
 

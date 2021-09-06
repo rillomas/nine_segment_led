@@ -4,22 +4,25 @@ module nine_segment_to_six_pin(
 	input logic [8:0] segments,
 	output logic [2:0] rows,
 	output logic [2:0] cols);
-	// typedef enum {S0, S1, S2} blink_state;
-	// blink_state state = S0, next_state = S1;
-	// always_ff @(posedge clk) begin
-	// 	// Switch between rows based on clock value to simultaneously light multiple rows
-	// 	state <= next_state;
-	// end
-
+	typedef enum {S0, S1, S2} blink_state;
+	blink_state state = S0, next_state = S1;
+	// transition state
+	always_ff @(posedge clk) begin
+		state <= next_state;
+	end
+	always_comb begin
+		case (state)
+			S0: next_state = S1;
+			S1: next_state = S2;
+			S2: next_state = S0;
+			default: next_state = S0;
+		endcase
+	end
 	// initial begin
 	// 	$dumpfile("dump.vcd");
 	// 	$dumpvars;
 	// end
-	// 0 (b0_0000_0000): row b000 col b000
-	// 1 (b0_0001_0000): row b010 col b101
-	// 4 (b1_0100_0101): row b101 col b010
-	// 6 (b1_1100_0111): row b111 col b010
-	always @* begin
+	always_comb begin
 		case (segments)
 			// 0
 			9'b000000000: begin
@@ -28,18 +31,117 @@ module nine_segment_to_six_pin(
 			end
 			// 1
 			9'b000010000: begin
+				// light center
 				rows = 3'b010;
 				cols = 3'b101;
 			end
+			// 2
+			9'b100000001: begin
+				case (state)
+					S0: begin
+						// light top left only
+						rows = 3'b100;
+						cols = 3'b011;
+					end
+					S1: begin
+						// don't light any
+						rows = 3'b000;
+						cols = 3'b000;
+					end
+					S2: begin
+						// light bottom right only
+						rows = 3'b001;
+						cols = 3'b110;
+					end
+					default: begin
+						rows = 3'b000;
+						cols = 3'b000;
+					end
+				endcase
+			end
+			// 3
+			9'b100010001: begin
+				case (state)
+					S0: begin
+						// light top left only
+						rows = 3'b100;
+						cols = 3'b011;
+					end
+					S1: begin
+						// light center
+						rows = 3'b010;
+						cols = 3'b101;
+					end
+					S2: begin
+						// light bottom right only
+						rows = 3'b001;
+						cols = 3'b110;
+					end
+					default: begin
+						rows = 3'b000;
+						cols = 3'b000;
+					end
+				endcase
+			end
 			// 4
 			9'b101000101: begin
+				// light four corners
 				rows = 3'b101;
 				cols = 3'b010;
 			end
+			// 5
+			9'b101010101: begin
+				case (state)
+					S0: begin
+						// light top left and right
+						rows = 3'b100;
+						cols = 3'b010;
+					end
+					S1: begin
+						// light center
+						rows = 3'b010;
+						cols = 3'b101;
+					end
+					S2: begin
+						// light bottom left and right
+						rows = 3'b001;
+						cols = 3'b010;
+					end
+					default: begin
+						rows = 3'b000;
+						cols = 3'b000;
+					end
+				endcase
+			end
 			// 6
 			9'b111000111: begin
+				// light first and third col
 				rows = 3'b111;
 				cols = 3'b010;
+			end
+			// 7
+			9'b111010111: begin
+				case (state)
+					S0: begin
+						// light top left and right
+						rows = 3'b100;
+						cols = 3'b010;
+					end
+					S1: begin
+						// light whole row
+						rows = 3'b010;
+						cols = 3'b000;
+					end
+					S2: begin
+						// light bottom left and right
+						rows = 3'b001;
+						cols = 3'b010;
+					end
+					default: begin
+						rows = 3'b000;
+						cols = 3'b000;
+					end
+				endcase
 			end
 			default: begin
 				rows = 3'b000;
@@ -47,38 +149,4 @@ module nine_segment_to_six_pin(
 			end
 		endcase
 	end
-
-	// always_comb begin
-	// 	// light LED and transition to next state
-	// 	case (state)
-	// 		S0: begin
-	// 			rows[2] = segments[8] | segments[7] | segments[6];
-	// 			rows[1] = 0;
-	// 			rows[0] = 0;
-	// 			next_state = S1;
-	// 		end
-	// 		S1: begin
-	// 			rows[2] = 0;
-	// 			rows[1] = segments[5] | segments[4] | segments[3];
-	// 			rows[0] = 0;
-	// 			next_state = S2;
-	// 		end
-	// 		S2: begin
-	// 			rows[2] = 0;
-	// 			rows[1] = 0;
-	// 			rows[0] = segments[2] | segments[1] | segments[0];
-	// 			next_state = S0;
-	// 		end
-	// 		default: begin
-	// 			rows[2] = 0;
-	// 			rows[1] = 0;
-	// 			rows[0] = 0;
-	// 			next_state = S0;
-	// 		end
-	// 	endcase
-	// end
-	// // Rows should become high and cols should become low to light LEDs
-	// assign cols[2] = ~(segments[8] | segments[5] | segments[2]);
-	// assign cols[1] = ~(segments[7] | segments[4] | segments[1]);
-	// assign cols[0] = ~(segments[6] | segments[3] | segments[0]);
 endmodule

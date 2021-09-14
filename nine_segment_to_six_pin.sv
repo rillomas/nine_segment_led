@@ -1,6 +1,7 @@
 // Convert a nine segment signal to a 3x3 anode common LED pins (6 pins)
 module nine_segment_to_six_pin(
 	input logic clk,
+	input logic enable,
 	input logic [8:0] segments,
 	output logic [2:0] rows,
 	output logic [2:0] cols);
@@ -8,7 +9,12 @@ module nine_segment_to_six_pin(
 	blink_state state = S0, next_state = S1;
 	// transition state
 	always_ff @(posedge clk) begin
-		state <= next_state;
+		// Only transition when enable signal is toggled
+		// We do this to transition much slower than the base clock speed (and to avoid warnings with clock assignment)
+		// Reference: https://community.intel.com/t5/Intel-Quartus-Prime-Software/how-to-constrain-low-frequency-clocks/m-p/16798?profile.language=ja
+		if (enable == 1'b1) begin
+			state <= next_state;
+		end
 	end
 	always_comb begin
 		case (state)

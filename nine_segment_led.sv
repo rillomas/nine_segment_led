@@ -7,11 +7,16 @@ module nine_segment_led(
 	// so we flip the bits here
 	assign s = {~s2,~s1,~s0};
 	eight_dice dice(.s(s), .out(out));
+	// Create a slower clock enable signal
+	logic enable;
+	logic [31:0] cnt = 32'h00000000; // initialize counter with zero
+	always_ff @(posedge clk) begin
+		cnt <= cnt + 1; // count up
+	end
+	assign enable = cnt[23];
 	// convert 9 segment signals to 6 pin anode LED pins
 	logic [2:0] rows;
 	logic [2:0] cols;
-	logic enable;
-	led_clock led_clk(.base(clk), .derived(enable));
 	nine_segment_to_six_pin convert(.clk(clk), .enable(enable), .segments(out), .rows(rows), .cols(cols));
 	// o0 ... row 1 (+)
 	// o1 ... row 2 (+)

@@ -87,7 +87,6 @@ set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id nine_segment
 set_global_assignment -name EDA_TEST_BENCH_RUN_SIM_FOR "3 ms" -section_id nine_segment_to_six_pin_testbench
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME nine_segment_to_six_pin_testbench -section_id nine_segment_to_six_pin_testbench
 set_global_assignment -name EDA_TEST_BENCH_FILE nine_segment_to_six_pin_testbench.sv -section_id nine_segment_to_six_pin_testbench
-set_global_assignment -name SYSTEMVERILOG_FILE led_clock.sv
 set_global_assignment -name SYSTEMVERILOG_FILE nine_segment_to_six_pin.sv
 set_global_assignment -name SYSTEMVERILOG_FILE eight_dice.sv
 set_global_assignment -name SYSTEMVERILOG_FILE nine_segment_led.sv

@@ -11,7 +11,10 @@ module nine_segment_to_six_pin(
 	always_ff @(posedge clk) begin
 		// Only transition when enable signal is toggled
 		// We do this to transition much slower than the base clock speed (and to avoid warnings with clock assignment)
-		// Reference: https://community.intel.com/t5/Intel-Quartus-Prime-Software/how-to-constrain-low-frequency-clocks/m-p/16798?profile.language=ja
+		// We also use a clock enable signal to avoid creating different clock domains
+		// Reference:
+		// https://community.intel.com/t5/Intel-Quartus-Prime-Software/how-to-constrain-low-frequency-clocks/m-p/16798?profile.language=ja
+		// https://www.fpga4student.com/2017/08/how-to-generate-clock-enable-signal.html
 		if (enable == 1'b1) begin
 			state <= next_state;
 		end

@@ -13,7 +13,8 @@ module nine_segment_led(
 	always_ff @(posedge clk) begin
 		cnt <= cnt + 1; // count up
 	end
-	assign enable = cnt[23];
+	assign enable = cnt[17]; // 50MHz / 2^18 = 190Hz
+	// assign enable = cnt[23]; // 50MHz / 2^24 = 2.98Hz
 	// convert 9 segment signals to 6 pin anode LED pins
 	logic [2:0] rows;
 	logic [2:0] cols;
